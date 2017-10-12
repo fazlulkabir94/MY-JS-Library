@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+   <script src="vue js/vue.js"></script>
+   <style>
+     .red{
+      background-color: red;
+      width: 200px;
+      height: 200px;
+     }
+     .blue{
+      background-color: blue;
+       width: 200px;
+      height: 200px;
+     }
+   </style>
+</head>
+<body>
+  <div id="myvue">
+   <button @click="click">click me!</button>
+      <p :class="message">{{message}}</p>
+      <p v-if="show">{{now}}</p>
+      <ul>
+        <li v-for="(person,index) in persons">{{index+" "+person.name+" "+person.age}}</li>
+      </ul>
+      <p>{{mesg|upercase}}</p>
+      <app-tag></app-tag>
+      <h1><app-user></app-user></h1>
+  </div>
+  <script>
+    Vue.filter('uppercase', function (value) {
+      return value.toUpperCase();
+    })
+    Vue.component('app-tag',{
+      data:function(){
+        return {
+          users:[
+          {name:'shohag'},
+          {name:'kabir'}
+          ]
+        }
+      },
+      template:'<div><ul v-for="user in users"><li>{{user.name|uppercase}}</li></ul></div>'
+    }
+    );
+    var myvue=new Vue({
+      el:"#myvue",
+      data:{
+        message:34,
+        number:1,
+        show:true,
+        mesg:'SHOHAG',
+        persons:[
+        {name:'shohag',age:45},
+        {name:'kabir',age:3},
+        {name:'asa',age:2},
+        {name:'asif',age:1}
+        ]
+      },
+      methods:{
+        click:function(){
+          this.show=!this.show;
+        }
+      },
+      computed:{
+        message(){
+         return this.number*2;
+        },
+        now:function(){
+          return Date.now();
+        }
+      },
+      filters:{
+        lowercase:function(value){
+          return value.toLowerCase();
+        }
+      },
+      components:{
+        'app-user':{
+          data:function(){
+        return {
+          users:[
+          {name:'shohag'},
+          {name:'kabir'}
+          ]
+        }
+      },
+      template:'<div><ul v-for="user in users"><li>{{user.name|uppercase}}</li></ul></div>'
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>
