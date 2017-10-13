@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="vue js/vue.js"></script>
+  <script src="vue js/vueajax.js"></script>
+  <title></title>
+</head>
+<body>
+<div id="myapp">
+  <p>{{message}}</p>
+  <button @click="refresh">click me!</button>
+  <ul v-for="user in users">
+    <li>{{user}}</li>
+  </ul>
+</div>
+<script >
+  var myapp=new Vue({
+    el:"#myapp",
+    data:{
+      message:"shohag",
+      users:''
+    },
+    http:{
+      emulateJSON:true,
+      emulateHTTP:true
+    },
+    methods:{
+      refresh:function(){
+        this.$http.post('vue.php',{name:"shohag"}).then(response => {
+          if (response.status==200) {
+            console.log(response.data);
+          }
+        }).catch(err => {
+          console.log(err);
+        });
+      }
+    }
+  });
+</script>
+</body>
+</html>
