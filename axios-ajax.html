@@ -1,0 +1,76 @@
+@extends('admin.master')
+@section('content')
+@section('content')
+<div id="page-wrapper">
+	<div align="center" id="app">
+	<button @click="refresh" type="button" class="btn btn-success">button</button>
+	<table v-if="seen" class="table table-hover table-responsive table-bordered">
+		<thead>
+			<caption class="text-center">Data Base table</caption>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Created_at</th>
+				<th>Updated_at</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+		<table-data></table-data>
+		</tbody>
+	</table>
+	</div>
+	<script>
+		var app=new Vue({
+			el:"#app",
+			data:{
+				users:{name:"shohag"},
+				seen:false,
+				save:true
+			},
+			  http: {
+            emulateJSON: true,
+            emulateHTTP: true
+            },
+			mounted:function(){
+				console.log("this is working man!");
+			},
+			methods:{
+				refresh:function(){
+					axios.post('/vue/data/shohag',{name:"kabir",age:34}).then(res => {
+					  if (res.status==200) {
+					  	/*this.seen=!this.seen;
+					  	this.users=res.data;*/
+					  	console.log(res.data);
+					  }
+					}).catch(err => {
+					  console.log(err.status);
+					});
+				}
+			},
+			components:{
+				data () {
+			  return {
+			    save:true,
+			    users:this.users
+			  };
+			},
+				"table-data":{
+					template:'<tr><td>jani</td></tr>'
+				}
+			}
+		});
+/*<div><tr v-for="user in users">\
+				\
+			  <td>@{{user.id}}</td>\
+				<td>@{{user.name}}</td>\
+				<td>@{{user.email}}</td>\
+				<td>@{{user.created_at}}</td>\
+				<td>@{{user.updated_at}}</td>\
+				<td><a v-if="save" @click="save=false" class="glyphicon glyphicon-edit" href="#"></a>\
+					<a v-else v-on:click="save=true" class="glyphicon glyphicon-save" href="#"></a>\
+					<a class="glyphicon glyphicon-trash" href="#"></a></td></tr><div>*/
+	</script>
+</div>
+@endsection
