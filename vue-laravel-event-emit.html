@@ -1,0 +1,94 @@
+component
+<template>
+	<div>
+		<label>{{ title|uppercase }}</label>
+		<input type="text" @input="messageChange" >
+	</div>
+</template>
+<script>
+	export default{
+	  name: 'input',
+	  data () {
+    return {
+      firstName: ''
+	    }
+	  },
+	  props: {
+	    title: {
+	      type: String, // String, Number, Boolean, Function, Object, Array
+	      required: true,
+	      default: null
+	    }
+	  },
+	  watch: {
+	    firstName: function () {
+	      this.$emit('input', this.firstName)
+	    }
+	  },
+	  methods: {
+	    messageChange (event) {
+	      this.firstName = event.target.value
+	      this.$emit('input', this.firstName)
+	    }
+
+	  },
+	  filters: {
+	    uppercase: function (value) {
+	      return value.toUpperCase()
+	    }
+	  }
+	}
+</script>
+vue.app file
+<template>
+  <div id="app">
+    <img src="./assets/logo.png">
+    <hr>
+    <input type="" v-model="input" name="">
+   <app-message :title="input" @it="like"></app-message>
+   <h1>this is simple example</h1>
+   <p>{{ data }}</p>
+ 
+     <li>{{ users.firstName }}</li>
+     <li>{{ users.LastName }}</li>
+     <li>{{ users.Email }}</li>
+     <li>{{ users.password }}</li>
+   <app-input title='firstName' @input='users.firstName=$event'> </app-input>
+   <app-input title='LastName' @input='users.LastName=$event'> </app-input>
+   <app-input title='Email' @input='users.Email=$event'> </app-input>
+   <app-input title='password' @input='users.password=$event'> </app-input>
+  </div>
+</template>
+
+<script>
+import Message from './components/message.vue'
+export default {
+  name: 'app',
+  components: {
+    'app-message': Message
+  },
+  data () {
+    return {
+      input: '',
+      data: '',
+      users: {firstName: '', LastName: '', Email: '', password: ''}
+    }
+  },
+  methods: {
+    like: function () {
+      alert('owwwwwww')
+    }
+  }
+}
+</script>
+
+<style scoped>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
