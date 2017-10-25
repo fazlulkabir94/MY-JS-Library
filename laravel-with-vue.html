@@ -1,0 +1,45 @@
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
+require('./bootstrap');
+
+window.Vue = require('vue');
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+import Input from './components/input'
+Vue.component('app-input',Input)
+const app = new Vue({
+    el: '#app',
+    data:{
+    	messsage: 'noting to say'
+    },
+    components:{
+    	example:require('./components/Example')
+   
+    }
+});
+and Test.blade.php file
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	 <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+</head>
+<body>
+	<div id="app">
+		<p class="text-center">@{{ messsage }}</p>
+		<example class="text-center"></example>
+		<app-input></app-input>
+	</div>
+	<script src="{{ mix('js/app.js') }}"></script>
+</body>
+</html>
