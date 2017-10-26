@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	   <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script>window.Laravel = { csrfToken: '{{ csrf_token() }}' }</script>
+	 <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+</head>
+<body>
+	<div id="app">
+
+		<!--<p class="text-center">@{{ messsage }}</p>
+		<example class="text-center"></example>
+		<p class="text-center">@{{ userName }}</p>
+		<p class="text-center">@{{ password }}</p>
+		<router-view></router-view>
+		<app-input></app-input>
+		<app-login title='user login form' @input="userName=$event" @password="password=$event"></app-login>
+		<ul>
+			<li><router-link class="glyphicon glyphicon-asterisk" to='/login/10'>login</router-link></li>
+			<li><router-link to='/home'>home</router-link></li>
+		</ul>
+		<hr>
+		<input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" type="text" placeholder="Email">
+		<p><span class="alert-warning" v-show="errors.has('email')">@{{ errors.first('email') }}</span></p>
+		<input type="text" name="number" name="number" v-validate="'required|numeric|max:3'">
+		<p class="has-danger"><span class="alert-danger" v-show="errors.has('number')">@{{ errors.first('number') }}</span></p>-->
+		<app-form></app-form>
+	</div>
+	<script src="{{ mix('js/app.js') }}"></script>
+</body>
+</html>
